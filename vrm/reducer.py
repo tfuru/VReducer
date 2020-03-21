@@ -626,19 +626,19 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     if cloth_type == CLOTH_STUDENT:
         # 制服上下、リボン、靴
         gltf = combine_material(gltf, {
-            '_Tops_': {'pos': (0, 0), 'size': (2048, 1536)},
-            '_Bottoms_': {'pos': (0, 1536), 'size': (512, 512)},
-            '_Accessory_': {'pos': (512, 1536), 'size': (512, 512)},
-            '_Shoes_': {'pos': (1024, 1536), 'size': (512, 512)}
-        }, '_Tops_', texture_size)
+            'baseColorTexture': {'pos': (0, 0), 'size': (2048, 1536)},
+            'baseColorTexture': {'pos': (0, 1536), 'size': (512, 512)},
+            'baseColorTexture': {'pos': (512, 1536), 'size': (512, 512)},
+            'baseColorTexture': {'pos': (1024, 1536), 'size': (512, 512)}
+        }, 'baseColorTexture', texture_size)
 
     elif cloth_type == CLOTH_MALE_STUDENT:
         gltf = combine_material(gltf, {
-            '_Tops_': {'pos': (0, 0), 'size': (2048, 1024)},
-            '_Bottoms_': {'pos': (0, 1024), 'size': (1024, 1024)},
-            '_Accessory_': {'pos': (1024, 1024), 'size': (512, 512)},
-            '_Shoes_': {'pos': (1024, 1536), 'size': (512, 512)}
-        }, '_Tops_', texture_size)
+            'baseColorTexture': {'pos': (0, 0), 'size': (2048, 1024)},
+            'baseColorTexture': {'pos': (0, 1024), 'size': (1024, 1024)},
+            'baseColorTexture': {'pos': (1024, 1024), 'size': (512, 512)},
+            'baseColorTexture': {'pos': (1024, 1536), 'size': (512, 512)}
+        }, 'baseColorTexture', texture_size)
 
     elif cloth_type == CLOTH_ONE_PIECE:
         # ワンピース、靴
@@ -646,9 +646,9 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
         # 0.4.0-p1: F00_002_Onepice
         # 0.6.3: F00_002_01_Onepice
         gltf = combine_material(gltf, {
-            '_Onepi': {'pos': (0, 0), 'size': (2048, 1536)},
-            '_Shoes_': {'pos': (0, 1536), 'size': (512, 512)}
-        }, '_Onepi', texture_size)
+            'baseColorTexture': {'pos': (0, 0), 'size': (2048, 1536)},
+            'baseColorTexture': {'pos': (0, 1536), 'size': (512, 512)}
+        }, 'baseColorTexture', texture_size)
 
     # 体、顔、口
     gltf = combine_material(gltf, {
