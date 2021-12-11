@@ -669,7 +669,7 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     }, '_FaceEyeline_', texture_size)
     # アイライン、まつ毛 レンダータイプを変更
     eye_line = find_vrm_material(gltf, '_FaceEyeline_')
-    # eye_line['keywordMap']['_ALPHATEST_ON'] = True
+    eye_line['keywordMap']['_ALPHATEST_ON'] = True
     eye_line['tagMap']["RenderType"] = 'TransparentCutout'
 
     # 瞳孔、ハイライト、白目
