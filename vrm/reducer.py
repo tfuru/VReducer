@@ -671,6 +671,7 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     eye_line = find_vrm_material(gltf, '_FaceEyeline_')
     eye_line['keywordMap']['_ALPHATEST_ON'] = True
     eye_line['tagMap']["RenderType"] = 'TransparentCutout'
+    eye_line['floatProperties']["_BlendMode"] = 2
 
     # 瞳孔、ハイライト、白目
     gltf = combine_material(gltf, {
