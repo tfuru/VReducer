@@ -34,18 +34,16 @@ def unique_vrm_materials(vrm_materials):
             del copied['vectorProperties']['_OutlineColor']
 
         if copied not in copied_materials:
+            copied_materials.append(copied)
             if '_Hair_' not in material['name']:
-                copied_materials.append(copied)
                 unique_material_names.append(material['name'])
             else:
                 # VRoidMobile 対応 髪マテリアル _HAIR_ に対応
                 if '_HAIR_' not in material['name']:
-                    copied_materials.append(copied)
                     unique_material_names.append(material['name'])
                     hair_material = deepcopy(material)
                     hair_material_name = material['name']
                 else:
-                    copied_materials.append(hair_material)
                     unique_material_names.append(hair_material_name)
         yield material['name'], unique_material_names[copied_materials.index(copied)]
 
