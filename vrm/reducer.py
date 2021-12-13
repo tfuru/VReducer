@@ -41,7 +41,7 @@ def unique_vrm_materials(vrm_materials):
                 if '_HAIR_' not in material['name']:
                     copied_materials.append(copied)
                     unique_material_names.append(material['name'])
-                    hair_material = deepcopy(copied)
+                    hair_material = deepcopy(material)
                 else:
                     copied_materials.append(hair_material)
                     unique_material_names.append(material['name'])
