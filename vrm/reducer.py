@@ -667,7 +667,7 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
         '_FaceEyeline_': {'pos': (0, 512), 'size': (1024, 512)},
         '_FaceEyelash_': {'pos': (0, 1024), 'size': (1024, 512)}
     }, '_FaceEyeline_', texture_size)
-    # アイライン、まつ毛 レンダータイプを変更
+    # VRoidMobile対応 アイライン、まつ毛 レンダータイプを変更
     eye_line = find_vrm_material(gltf, '_FaceEyeline_')
     eye_line['keywordMap']['_ALPHATEST_ON'] = True
     eye_line['tagMap']["RenderType"] = 'TransparentCutout'
@@ -691,6 +691,11 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
         if hair_material:
             hair_resize[hair_material['name']] = {'pos': (0, 0), 'size': (512, 1024)}
             gltf = combine_material(gltf, hair_resize, hair_material['name'], texture_size)
+        # VRoidMobile対応 _HAIR_1
+        hair_material_1 = find_near_vrm_material(gltf, '_HAIR_1', hair_back_material)            
+        if hair_material_1:
+            hair_resize[hair_material_1['name']] = {'pos': (0, 512), 'size': (1024, 512)}          
+            gltf = combine_material(gltf, hair_resize, hair_material_1['name'], texture_size)
 
     if replace_shade_color:
         # 陰色を消す
