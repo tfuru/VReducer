@@ -25,6 +25,7 @@ def unique_vrm_materials(vrm_materials):
     copied_materials = []  # nameキーを削除したマテリアルのリスト
     unique_material_names = []  # 重複しないマテリアル名リスト
     hair_material = None
+    hair_material_name = ''
     for material in vrm_materials:
         copied = deepcopy(material)
         del copied['name']  # 読み込み時に別々になるように書き換えているため、nameキーを除外して比較
@@ -42,9 +43,10 @@ def unique_vrm_materials(vrm_materials):
                     copied_materials.append(copied)
                     unique_material_names.append(material['name'])
                     hair_material = deepcopy(material)
+                    hair_material_name = material['name']
                 else:
                     copied_materials.append(hair_material)
-                    unique_material_names.append(material['name'])
+                    unique_material_names.append(hair_material_name)
         yield material['name'], unique_material_names[copied_materials.index(copied)]
 
 
