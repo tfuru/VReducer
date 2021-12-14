@@ -9,6 +9,7 @@ from PIL import Image
 
 from cleaner import clean
 from util import find, exists, unique, distance
+import pprint
 
 """
 VRoidモデルの削減処理
@@ -33,21 +34,23 @@ def unique_vrm_materials(vrm_materials):
             # 0.4.0-p1でOutlineColorが統一されないバグがあるので除外する
             del copied['vectorProperties']['_OutlineColor']
 
-        if copied not in copied_materials:
+        if copied not in copied_materials:            
             if '_Hair_' not in material['name']:
                 copied_materials.append(copied)
                 unique_material_names.append(material['name'])
+                yield material['name'], unique_material_names[copied_materials.index(copied)]
             else:
-                # VRoidMobile 対応 髪マテリアル _HAIR_ に対応
+                # VRoidMobile 対応 髪マテリアル _HAIR_1 に対応
                 if '_HAIR_' not in material['name']:
-                    copied_materials.append(copied)
+                    copied_materials.append(copied)                
                     unique_material_names.append(material['name'])
                     hair_material_name = material['name']
-                    hair_material = deepcopy(material)
+                    hair_material = deepcopy(copied)
+                    yield material['name'], unique_material_names[copied_materials.index(copied)]
                 else:
-                    copied_materials.append(copied)
+                    copied_materials.append(hair_material)
                     unique_material_names.append(hair_material_name)
-        yield material['name'], unique_material_names[copied_materials.index(copied)]
+                    yield material['name'], unique_material_names[copied_materials.index(hair_material)]
 
 
 def deduplicated_materials(gltf):
