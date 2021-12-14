@@ -712,6 +712,17 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
             hair_resize[hair_material['name']] = {'pos': (0, 512), 'size': (1024, 512)}
             gltf = combine_material(gltf, hair_resize, hair_material['name'], texture_size)
 
+    # VRoidMobile対応 首アクセサリ を Tops とまとめる
+    tops_material = find_vrm_material(gltf, '_Tops_')
+    if tops_material:
+        accessory_material = find_vrm_material(gltf, '_Accessory_')
+        if accessory_material:
+            resize_info = {
+                '_Tops_': {'pos': (0, 0), 'size': (512, 512)},
+                '_Accessory_': {'pos': (0, 512), 'size': (512, 512)}
+            }
+            gltf = combine_material(gltf, resize_info, tops_material['name'], texture_size)
+
     if replace_shade_color:
         # 陰色を消す
         gltf = replace_shade(gltf)
