@@ -24,6 +24,8 @@ def unique_vrm_materials(vrm_materials):
     # ハッシュ化の関係で辞書が使えなかったので、リスト2つで代用
     copied_materials = []  # nameキーを削除したマテリアルのリスト
     unique_material_names = []  # 重複しないマテリアル名リスト
+    hair_material_name = ''
+    hair_material = None
     for material in vrm_materials:
         copied = deepcopy(material)
         del copied['name']  # 読み込み時に別々になるように書き換えているため、nameキーを除外して比較
@@ -38,8 +40,13 @@ def unique_vrm_materials(vrm_materials):
             else:
                 # VRoidMobile 対応 髪マテリアル _HAIR_ に対応
                 if '_HAIR_' not in material['name']:
-                    unique_material_names.append(material['name'])
                     copied_materials.append(copied)
+                    unique_material_names.append(material['name'])
+                    hair_material_name = material['name']
+                    hair_material = deepcopy(material)
+                else:
+                    copied_materials.append(copied)
+                    unique_material_names.append(hair_material_name)
         yield material['name'], unique_material_names[copied_materials.index(copied)]
 
 
