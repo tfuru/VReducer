@@ -702,10 +702,14 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     # 髪の毛、頭の下毛
     hair_back_material = find_vrm_material(gltf, '_HairBack_')
     if hair_back_material:
-        hair_resize = {'_HairBack_': {'pos': (512, 0), 'size': (1024, 1024)}}
+        # VRoidMobile対応 髪テクスチャ 配置変更
+        # hair_resize = {'_HairBack_': {'pos': (512, 0), 'size': (1024, 1024)}}
+        hair_resize = {'_HairBack_': {'pos': (0, 0), 'size': (1024, 512)}}
         hair_material = find_near_vrm_material(gltf, '_Hair_', hair_back_material)
         if hair_material:
-            hair_resize[hair_material['name']] = {'pos': (0, 0), 'size': (512, 1024)}
+            # VRoidMobile対応 髪テクスチャ 配置変更
+            # hair_resize[hair_material['name']] = {'pos': (0, 0), 'size': (512, 1024)}
+            hair_resize[hair_material['name']] = {'pos': (0, 512), 'size': (1024, 512)}
             gltf = combine_material(gltf, hair_resize, hair_material['name'], texture_size)
 
     if replace_shade_color:
