@@ -684,11 +684,17 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     face_mat['tagMap']["RenderType"] = 'TransparentCutout'
 
     # アイライン、まつ毛
-    gltf = combine_material(gltf, {
+    resize_info = {
         find_eye_extra_name(gltf): {'pos': (0, 0), 'size': (1024, 512)},
         '_FaceEyeline_': {'pos': (0, 512), 'size': (1024, 512)},
         '_FaceEyelash_': {'pos': (0, 1024), 'size': (1024, 512)}
-    }, '_FaceEyeline_', texture_size)
+    }
+    # VRoidStudio 正式版 _FaceBrow_
+    face_brow_material = find_vrm_material(gltf, '_FaceBrow_')
+    if face_brow_material:
+        resize_info[face_brow_material['name']] = {'pos': (0, 1536), 'size': (1024, 512)}
+    gltf = combine_material(gltf, resize_info, '_FaceEyeline_', texture_size)
+
     # VRoidMobile対応 アイライン、まつ毛 レンダータイプを変更
     eye_line = find_vrm_material(gltf, '_FaceEyeline_')
     eye_line['keywordMap']['_ALPHATEST_ON'] = True
@@ -704,6 +710,17 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
         '_EyeHighlight_': {'pos': (0, 512), 'size': (1024, 512)},
         '_EyeWhite_': {'pos': (0, 1024), 'size': (1024, 512)}
     }, '_EyeHighlight_', texture_size)
+
+    # VRoidStudio 正式版 めがね _GlassesLowFrame_
+    glasses_material = find_vrm_material(gltf, '_GlassesLowFrame_')
+    if glasses_material:
+        resize_info = {
+            glasses_material['name']:{'pos': (0, 0), 'size': (1024, 512)}
+        }
+        glasses_low_lens_material = find_vrm_material(gltf, '_GlassesLowLens_')
+        if glasses_low_lens_material:
+            resize_info[glasses_low_lens_material['name']] = {'pos': (0, 512), 'size': (1024, 512)}
+        gltf = combine_material(gltf, resize_info, '_FaceEyeline_', texture_size)
 
     # 髪の毛、頭の下毛
     hair_back_material = find_vrm_material(gltf, '_HairBack_')
