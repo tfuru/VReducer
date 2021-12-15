@@ -48,10 +48,16 @@ def unique_vrm_materials(vrm_materials):
                     hair_material = deepcopy(copied)
                     yield material['name'], unique_material_names[copied_materials.index(copied)]
                 else:
-                    copied_materials.append(hair_material)
-                    unique_material_names.append(hair_material_name)
-                    yield material['name'], unique_material_names[copied_materials.index(hair_material)]
-
+                    if hair_material_name != '':
+                        # VRoidMobile 対応 髪マテリアル _HAIR_1 に対応
+                        copied_materials.append(hair_material)
+                        unique_material_names.append(hair_material_name)
+                        yield material['name'], unique_material_names[copied_materials.index(hair_material)]
+                    else:
+                        # VRoidStudio 正式版 髪への対応
+                        copied_materials.append(copied)
+                        unique_material_names.append(material['name'])
+                        yield material['name'], unique_material_names[copied_materials.index(copied)]
 
 def deduplicated_materials(gltf):
     """
