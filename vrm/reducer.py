@@ -729,6 +729,28 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
             }
             gltf = combine_material(gltf, resize_info, tops_material['name'], texture_size)
 
+    # VRoidStudio 正式版 髪の毛 F00_000_Hair_00_HAIR_01 - F00_000_Hair_00_HAIR_06
+    hair_01_material = find_vrm_material(gltf, '_Hair_00_HAIR_01')
+    hair_06_material = find_vrm_material(gltf, '_Hair_00_HAIR_06')
+    if hair_01_material and hair_06_material:
+        # texture_size 2048, 2048
+        hair_02_material = find_vrm_material(gltf, '_Hair_00_HAIR_02')
+        hair_03_material = find_vrm_material(gltf, '_Hair_00_HAIR_03')
+        hair_04_material = find_vrm_material(gltf, '_Hair_00_HAIR_04')
+        hair_05_material = find_vrm_material(gltf, '_Hair_00_HAIR_05')
+        hair_resize = {
+            hair_01_material['name']: {'pos': (0, 0), 'size': (1024, 341)},
+            hair_02_material['name']: {'pos': (0, 341), 'size': (1024, 341)},
+            hair_05_material['name']: {'pos': (0, 682), 'size': (1024, 341)},
+            hair_06_material['name']: {'pos': (0, 1024), 'size': (1024, 341)},
+            hair_03_material['name']: {'pos': (0, 1365), 'size': (1024, 341)},
+            hair_04_material['name']: {'pos': (0, 1706), 'size': (1024, 341)},
+        }
+        gltf = combine_material(gltf, hair_resize, hair_01_material['name'], texture_size)
+    
+    # VRoidStudio 正式版 髪プリミティブ統合
+    gltf = combine_all_primitives(gltf, 'Hair')
+
     if replace_shade_color:
         # 陰色を消す
         gltf = replace_shade(gltf)
