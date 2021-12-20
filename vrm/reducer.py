@@ -701,7 +701,7 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     eye_line['tagMap']["RenderType"] = 'TransparentCutout'
     eye_line['floatProperties']["_BlendMode"] = 1
     eye_line['floatProperties']["_CullMode"] = 0
-    eye_line['floatProperties']["_ZWrite"] = 1
+    eye_line['floatProperties']["_ZWrite"] = 0
     eye_line['renderQueue'] = 2450
 
     # 瞳孔、ハイライト、白目
