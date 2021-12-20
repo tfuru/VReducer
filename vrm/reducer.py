@@ -697,12 +697,13 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
 
     # VRoidMobile対応 アイライン、まつ毛 レンダータイプを変更
     eye_line = find_vrm_material(gltf, '_FaceEyeline_')
-    eye_line['keywordMap']['_ALPHATEST_ON'] = True
-    eye_line['tagMap']["RenderType"] = 'TransparentCutout'
-    eye_line['floatProperties']["_BlendMode"] = 1
-    eye_line['floatProperties']["_CullMode"] = 0
-    eye_line['floatProperties']["_ZWrite"] = 0
-    eye_line['renderQueue'] = 2450
+    if eye_line:
+        eye_line['keywordMap']['_ALPHATEST_ON'] = True
+        eye_line['tagMap']["RenderType"] = 'TransparentCutout'
+        eye_line['floatProperties']["_BlendMode"] = 1
+        eye_line['floatProperties']["_CullMode"] = 0
+        eye_line['floatProperties']["_ZWrite"] = 1
+        eye_line['renderQueue'] = 2450
 
     # 瞳孔、ハイライト、白目
     gltf = combine_material(gltf, {
