@@ -711,6 +711,16 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
         '_EyeHighlight_': {'pos': (0, 512), 'size': (1024, 512)},
         '_EyeWhite_': {'pos': (0, 1024), 'size': (1024, 512)}
     }, '_EyeHighlight_', texture_size)
+    
+    # VRoidMobile対応 目が光る事を修正
+    eye_highlight = find_vrm_material(gltf, '_EyeHighlight_')
+    if eye_highlight:
+        eye_highlight['tagMap']["RenderType"] = 'TransparentCutout'
+        eye_highlight['floatProperties']["_CullMode"] = 0
+        eye_highlight['floatProperties']["_BlendMode"] = 1
+        eye_highlight['floatProperties']["_ZWrite"] = 1
+        eye_highlight['keywordMap']['_ALPHATEST_ON'] = True
+        eye_highlight['renderQueue'] = 2450
 
     # VRoidStudio 正式版 めがね _GlassesLowFrame_
     glasses_material = find_vrm_material(gltf, '_GlassesLowFrame_')
