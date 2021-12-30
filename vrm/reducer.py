@@ -85,8 +85,11 @@ def deduplicated_materials(gltf):
     for mesh in gltf['meshes']:
         for primitive in mesh['primitives']:
             # プリミティブの材質を置換
-            new_name = unique_name_map[primitive['material']['name']]
-            primitive['material'] = name2materials[new_name]
+            material_name = primitive['material']['name']
+            # VRoidStudio 正式版への対応
+            if material_name in unique_name_map:
+                new_name = unique_name_map[material_name]
+                primitive['material'] = name2materials[new_name]
 
     return gltf
 
