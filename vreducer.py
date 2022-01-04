@@ -31,17 +31,17 @@ def main(argv):
     opt = parser.parse_args(argv)
 
     path = opt.path
-    print path
+    print(path)
 
     # vrm読み込み
     vrm = load(path)
 
     print_stat(vrm.gltf)
 
-    print '-' * 30
+    print( '-' * 30 )
     vrm.gltf = reduce_vroid(vrm.gltf, opt.replace_shade_color, parse_texture_size(opt.texture_size), opt.emissive_color)
 
-    print '-' * 30
+    print( '-' * 30 )
     print_stat(vrm.gltf)
 
     save_dir = join(dirname(path), 'result')
@@ -56,7 +56,7 @@ def main(argv):
 
     # vrm保存
     vrm.save(save_path)
-    print 'saved.'
+    print( 'saved.' )
 
 
 if __name__ == '__main__':

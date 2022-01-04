@@ -630,21 +630,21 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     gltf = deduplicated_materials(gltf)
 
     # 髪プリミティブ統合
-    print 'combine hair primitives...'
+    print( 'combine hair primitives...' )
     gltf = combine_all_primitives(gltf, 'Hair')
 
     # バンプマップ、スフィアマップを削除
-    print 'shrink materials...'
+    print( 'shrink materials...' )
     gltf = shrink_materials(gltf)
 
     # 顔のプリミティブ描画順を並び替え
-    print 'sort face primitives...'
+    print( 'sort face primitives...' )
     gltf = sorted_mesh_primitives(gltf, 'Face', ['_Face_', find_eye_extra_name(gltf), '_FaceMouth_',
                                                  '_FaceEyeline_', '_FaceEyelash_', '_FaceBrow_',
                                                  '_EyeWhite_', '_EyeIris_', '_EyeHighlight_'])
 
     # マテリアルを結合
-    print 'combine materials...'
+    print( 'combine materials...' )
 
     cloth_type = get_cloth_type(gltf)
 
@@ -801,7 +801,7 @@ def reduce_vroid(gltf, replace_shade_color, texture_size, emissive):
     gltf = clean(gltf)
 
     # 他のテクスチャ画像サイズの変換
-    print 'reduced images...'
+    print( 'reduced images...' )
     gltf = reduced_images(gltf, texture_size)
 
     return clean(gltf)
