@@ -49,8 +49,8 @@ def main(argv):
     # if not exists(save_dir):
     #    mkdir(save_dir)  # 出力先作成
     # save_path = join(save_dir, basename(path))
-    
-    save_path = join(dirname(path), basename(path))
+    save_path = join(dirname(path), 'result_' + basename(path))
+
     # 上書き確認
     if not opt.force and exists(save_path):
         if input('Already exists file. Overwrite?(y/N):').lower() not in ['y', 'yes']:
