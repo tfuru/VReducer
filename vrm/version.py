@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+
 
 """
 アプリケーション、バージョン情報
 """
 APP_NAME = 'VReducer'
-VERSION = '0.3.0'
+VERSION = '0.4.1'
 
 
 def app_name():
-    return '{}-{}'.format(APP_NAME, VERSION)
+    return f'{APP_NAME}-{VERSION}'

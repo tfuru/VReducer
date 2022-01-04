@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import re
 from copy import deepcopy
 
@@ -127,11 +127,11 @@ def indexing(gltf):
     buffer_views = gltf['bufferViews']
 
     # bufferViewからchunkを生成
-    chunk = ''
+    chunk = b''
     offset = 0
     for buffer_view in buffer_views:
         data = buffer_view.pop('data')
-        data = data.ljust((len(data) + 3) / 4 * 4, '\0') # 4バイトアラインメント
+        data = data.ljust((len(data) + 3) // 4 * 4, b'\x00')  # 4バイトアラインメント
         length = len(data)
         buffer_view['buffer'] = 0  # 1バッファにまとめるのでインデックスは0
         buffer_view['byteOffset'] = offset

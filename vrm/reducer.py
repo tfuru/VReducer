@@ -116,7 +116,7 @@ def combine_primitives(primitives):
     primitive_indices = [primitive['indices'] for primitive in primitives]
 
     # プリミティブのbufferView列挙
-    buffer_views = map(lambda indices: indices['bufferView'], primitive_indices)
+    buffer_views = list(map(lambda indices: indices['bufferView'], primitive_indices))
     head_view = buffer_views[0]
     # 統合したbufferViewを作成
     buf = head_view['buffer']
@@ -507,7 +507,7 @@ def combine_material(gltf, resize_info, base_material_name, texture_size=(2048, 
         indices_buffer = accessor['bufferView']['data']
         indices_offset = accessor['byteOffset']
         indices = map(lambda i: struct.unpack_from('I', indices_buffer, indices_offset + i * 4)[0],
-                      xrange(accessor['count']))
+                      range(accessor['count']))
 
         # uvバッファ
         original_data = original_view_datas[view_index]

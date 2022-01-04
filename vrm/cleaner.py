@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+
 from copy import deepcopy
 
 from .util import unique
@@ -21,7 +21,7 @@ def clean_gltf_materials(gltf):
     :param gltf: glTFオブジェクト
     :return: 新しいマテリアルリスト
     """
-    return filter(lambda m: m['name'] in used_material_names(gltf), gltf['materials'])
+    return list(filter(lambda m: m['name'] in used_material_names(gltf), gltf['materials']))
 
 
 def clean_vrm_materials(gltf):
@@ -32,7 +32,7 @@ def clean_vrm_materials(gltf):
     """
     # VRMマテリアル削除
     vrm = gltf['extensions']['VRM']
-    return filter(lambda m: m['name'] in used_material_names(gltf), vrm['materialProperties'])
+    return list(filter(lambda m: m['name'] in used_material_names(gltf), vrm['materialProperties']))
 
 
 def list_textures(gltf):
@@ -74,7 +74,7 @@ def clean_images(gltf):
     :param gltf: glTFオブジェクト
     :return: 新しい画像リスト
     """
-    return map(lambda t: t['source'], gltf['textures'])
+    return list(map(lambda t: t['source'], gltf['textures']))
 
 
 def clean_samplers(gltf):
@@ -83,7 +83,7 @@ def clean_samplers(gltf):
     :param gltf: glTFオブジェクト
     :return: 新しいサンプラーリスト
     """
-    return map(lambda t: t['sampler'], gltf['textures'])
+    return list(map(lambda t: t['sampler'], gltf['textures']))
 
 
 def list_accessors(gltf):
