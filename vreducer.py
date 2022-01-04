@@ -45,11 +45,12 @@ def main(argv):
     print( '-' * 30 )
     print_stat(vrm.gltf)
 
-    save_dir = join(dirname(path), 'result')
-    if not exists(save_dir):
-        mkdir(save_dir)  # 出力先作成
-
-    save_path = join(save_dir, basename(path))
+    # save_dir = join(dirname(path), 'result')
+    # if not exists(save_dir):
+    #    mkdir(save_dir)  # 出力先作成
+    # save_path = join(save_dir, basename(path))
+    
+    save_path = join(dirname(path), basename(path))
     # 上書き確認
     if not opt.force and exists(save_path):
         if input('Already exists file. Overwrite?(y/N):').lower() not in ['y', 'yes']:
