@@ -4,6 +4,7 @@ import sys
 from argparse import ArgumentParser
 from os import mkdir
 from os.path import dirname, join, exists, basename
+import importlib
 
 from vrm.debug import print_stat
 from vrm.reducer import reduce_vroid
@@ -60,7 +61,6 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding(sys.getfilesystemencoding())
-
+    importlib.reload(sys)
+    # sys.setdefaultencoding(sys.getfilesystemencoding())
     main(sys.argv[1:])
