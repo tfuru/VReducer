@@ -107,4 +107,6 @@ venv.bak/
 *.vrm
 
 # output directory
-result
+result/
+
+tmp/
