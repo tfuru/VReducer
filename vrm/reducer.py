@@ -7,8 +7,8 @@ from itertools import groupby
 
 from PIL import Image
 
-from cleaner import clean
-from util import find, exists, unique, distance
+from .cleaner import clean
+from .util import find, exists, unique, distance
 import pprint
 
 """

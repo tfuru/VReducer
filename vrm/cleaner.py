@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from copy import deepcopy
 
-from util import unique
+from .util import unique
 
 
 def used_material_names(gltf):

@@ -3,7 +3,7 @@
 import re
 from copy import deepcopy
 
-from version import app_name
+from .version import app_name
 
 
 def remove_instance(name):

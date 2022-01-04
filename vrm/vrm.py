@@ -3,7 +3,7 @@
 import json
 import struct
 
-from gltf import instancing, indexing
+from .gltf import instancing, indexing
 
 
 def read_binary(path):
