@@ -7,7 +7,6 @@ setuptools.setup(
     name="vreducer",
     version="0.0.1",
     install_requires=[
-        "Pillow",
     ],
     author="t_furu",
     author_email="t_furu@tf-web.jp",
