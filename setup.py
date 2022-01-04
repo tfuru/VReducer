@@ -6,8 +6,6 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="vreducer",
     version="0.0.1",
-    install_requires=[
-    ],
     author="t_furu",
     author_email="t_furu@tf-web.jp",
     description="VReducer VRoidMobile support",
